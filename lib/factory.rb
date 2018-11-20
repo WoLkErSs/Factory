@@ -51,7 +51,7 @@ class Factory
         end
 
         define_method :dig do |*arr|
-          arr.reduce(self) { |memo, char| (memo[char].is_a? NilClass) ? (return nil) : memo[char] }
+          arr.reduce(to_h) { |memo, char| (memo[char].is_a? NilClass) ? (return nil) : memo[char] }
         end
 
         define_method :each do |&block|
@@ -80,6 +80,10 @@ class Factory
 
         define_method :values_at do |*num|
           num.map { |x| values[x] }
+        end
+
+        define_method :to_h do
+          Hash[args_factory.zip(values)]
         end
 
         alias_method :eql?, :==
