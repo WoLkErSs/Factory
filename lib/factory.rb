@@ -82,6 +82,7 @@ class Factory
           num.map { |x| values[x] }
         end
 
+        alias_method :eql?, :==
         alias_method :to_a, :values
         alias_method :size, :length
         class_eval(&block) if block_given?
